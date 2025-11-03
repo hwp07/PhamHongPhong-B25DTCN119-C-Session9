@@ -1,37 +1,38 @@
 #include <stdio.h>
 #include <math.h>
 
-int isPrime(int x) {
-    if (x < 2) return 0;
-    for (int i = 2; i <= sqrt(x); i++) {
-        if (x % i == 0)
-            return 0;
-    }
-    return 1;
-}
-
 int main() {
-    int n;
+    int n, sum = 0;
     printf("Nhap so phan tu cua mang: ");
     scanf("%d", &n);
 
     int arr[n];
     for (int i = 0; i < n; i++) {
-        printf("arr[%d] =  ", i);
+        printf("arr[%d] = ", i);
         scanf("%d", &arr[i]);
     }
 
-    int sum = 0;
     printf("\nCac so nguyen to trong mang la: ");
     for (int i = 0; i < n; i++) {
-        if (isPrime(arr[i])) {
-            printf("%d ", arr[i]);
-            sum += arr[i];
+        int num = arr[i], flag = 1;
+
+        if (num < 2) flag = 0;
+        else {
+            for (int j = 2; j <= sqrt(num); j++) {
+                if (num % j == 0) {
+                    flag = 0;
+                    break;
+                }
+            }
+        }
+
+        if (flag) {
+            printf("%d ", num);
+            sum += num;
         }
     }
 
     printf("\nTong cac so nguyen to = %d\n", sum);
-
     return 0;
 }
 
